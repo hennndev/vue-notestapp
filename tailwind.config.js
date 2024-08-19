@@ -6,6 +6,9 @@
      extend: {
       colors: {
         'primary': '#1E201E'
+      },
+      gridTemplateColumns: {
+        'notes': 'repeat(auto-fill, minmax(300px, 1fr))'
       }
      },
    },
