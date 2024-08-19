@@ -1,4 +1,5 @@
 <script>
+    import { v4 as uuidv4 } from 'uuid'
     import Notes from './components/Notes.vue'
     import SearchInput from './components/SearchInput.vue'
     import FormModal from './components/Modal/FormModal.vue'
@@ -6,7 +7,8 @@
     export default {
         data() {
             return {
-                showModal: false
+                showModalAddNote: false,
+                notes: []
             }
         },
         components: {
@@ -15,8 +17,16 @@
             Notes
         },
         methods: {
-            handleShowModal(value) {
-                this.showModal = value
+            addNote(note) {
+                const newNote = {
+                    ...note,
+                    id: uuidv4()
+                }
+                this.notes.push(newNote)
+                localStorage.setItem('notes', JSON.stringify(this.notes))
+            },
+            handleShowModalAddNote(value) {
+                this.showModalAddNote = value
             }
         }    
     }
@@ -25,7 +35,10 @@
 <template>
     <main class="container py-4 pb-6">
         <SearchInput/>
-        <Notes :handleShowModal="handleShowModal"/>
-        <FormModal :showModal="this.showModal" :handleShowModal="handleShowModal"/>
+        <Notes :handleShowModalAddNote="handleShowModalAddNote"/>
+        <FormModal 
+            :showModalAddNote="this.showModalAddNote" 
+            :handleShowModalAddNote="handleShowModalAddNote"
+            :addNote="addNote"/>
     </main>
 </template>
