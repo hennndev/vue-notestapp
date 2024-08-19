@@ -2,7 +2,7 @@
 import Note from './Note.vue'
 
     export default {
-        props: ['handleShowModalAddNote'],
+        props: ['notes', 'handleShowModalAddNote'],
         components: {
             Note
         }
@@ -28,11 +28,9 @@ import Note from './Note.vue'
         </section>
 
         <section class="mt-10 grid grid-cols-notes gap-x-[20px] gap-y-[40px]">
-            <Note/>
-            <Note/>
-            <Note/>
-            <Note/>
-            <Note/>
+            <template v-for="note in this.notes" :key="note.id">
+                <Note :data="note"/>
+            </template>
         </section>
     </section>
 </template>

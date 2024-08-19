@@ -16,6 +16,12 @@
             FormModal,
             Notes
         },
+        created() {
+            const notes = JSON.parse(localStorage.getItem('notes'))
+            if(notes && notes.length > 0) {
+                this.notes = notes
+            }
+        },
         methods: {
             addNote(note) {
                 const newNote = {
@@ -35,7 +41,7 @@
 <template>
     <main class="container py-4 pb-6">
         <SearchInput/>
-        <Notes :handleShowModalAddNote="handleShowModalAddNote"/>
+        <Notes :notes="this.notes" :handleShowModalAddNote="handleShowModalAddNote"/>
         <FormModal 
             :showModalAddNote="this.showModalAddNote" 
             :handleShowModalAddNote="handleShowModalAddNote"

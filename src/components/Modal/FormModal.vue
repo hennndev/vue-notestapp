@@ -11,13 +11,16 @@
                 }
             }
         },
-        created(){
-            console.log(this.values)
-        },
         props: ['showModalAddNote', 'handleShowModalAddNote', 'addNote'],
         methods: {
             handleSubmit() {
                 this.addNote(this.values)
+                this.values = {
+                    title: '',
+                    date: moment(new Date()).format('YYYY-MM-DD'),
+                    background: ''
+                }
+                this.handleShowModalAddNote(false)
             }
         },
         computed: {
