@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "moment": "^2.30.1",
     "primeicons": "^7.0.0",
     "vue": "^3.4.29"
   },

@@ -1,7 +1,8 @@
 <script>
-import Note from './Note.vue';
+import Note from './Note.vue'
 
     export default {
+        props: ['handleShowModal'],
         components: {
             Note
         }
@@ -12,9 +13,17 @@ import Note from './Note.vue';
     <section class="mt-16">
         <section class="flex-between">
             <h1 class="text-6xl font-medium text-primary tracking-tighter">Notes</h1>
-            <div class="group bg-primary rounded-full py-3 px-6 flexx space-x-3 cursor-pointer border-2 border-transparent hover:bg-white hover:border-primary transition duration-200 ease-in">
-                <i class="pi pi-plus text-white group-hover:text-primary transition duration-200 ease-in"></i>
-                <p class="text-lg text-white group-hover:text-primary transition duration-200 ease-in">New note</p>
+
+            <div class="flexx space-x-3">
+                <div class="group bg-primary rounded-full py-3 px-6 flexx space-x-3 cursor-pointer border-2 border-transparent hover:bg-white hover:border-primary transition duration-200 ease-in" @click="this.handleShowModal(true)">
+                    <i class="pi pi-plus text-white group-hover:text-primary transition duration-200 ease-in"></i>
+                    <p class="text-lg text-white group-hover:text-primary transition duration-200 ease-in tracking-tight">New note</p>
+                </div>
+
+                <div class="group bg-primary rounded-full py-3 px-6 flexx space-x-3 cursor-pointer border-2 border-transparent hover:bg-white hover:border-primary transition duration-200 ease-in" @click="this.handleShowModal(true)">
+                    <i class="pi pi-filter text-white group-hover:text-primary transition duration-200 ease-in"></i>
+                    <p class="text-lg text-white group-hover:text-primary transition duration-200 ease-in tracking-tight">Filter notes</p>
+                </div>
             </div>
         </section>
 
