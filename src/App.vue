@@ -9,11 +9,10 @@
 </script>
 
 <template>
-    <header class="py-4 px-6">
+    <main class="container py-4 pb-6">
         <SearchInput/>
-    </header>
-    <main></main>
-    <footer></footer>
+        <footer></footer>
+    </main>
 </template>
 
 <style>
