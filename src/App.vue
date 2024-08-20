@@ -3,6 +3,7 @@
     import Notes from './components/Notes.vue'
     import SearchInput from './components/SearchInput.vue'
     import FormModal from './components/Modal/FormModal.vue'
+    import ConfirmationModal from './components/Modal/ConfirmationModal.vue'
 
     export default {
         data() {
@@ -11,12 +12,14 @@
                 noteEdit: null,
                 isEditNote: false,
                 showModalFormNote: false,
+                showConfirmModal: null
             }
         },
         components: {
-            SearchInput,
+            Notes,
             FormModal,
-            Notes
+            SearchInput,
+            ConfirmationModal,
         },
         created() {
             const notes = JSON.parse(localStorage.getItem('notes'))
@@ -47,12 +50,20 @@
                 this.notes = updatedNotes
                 localStorage.setItem('notes', JSON.stringify(updatedNotes))
             },
+            deleteNote(id) {
+                const updatedNotes = this.notes.filter(n => n.id !== id)
+                this.notes = updatedNotes
+                localStorage.setItem('notes', JSON.stringify(updatedNotes))
+            },
             handleShowModalFormNote(value) {
                 this.showModalFormNote = value
             },
             handleNoteEdit(data, value) {
                 this.noteEdit = data
                 this.isEditNote = value
+            },
+            handleConfirmModal(value) {
+                this.showConfirmModal = value
             }
         }    
     }
@@ -64,7 +75,8 @@
         <Notes 
             :notes="this.notes" 
             :handleShowModalFormNote="handleShowModalFormNote"
-            :handleNoteEdit="handleNoteEdit"/>
+            :handleNoteEdit="handleNoteEdit"
+            :handleConfirmModal="handleConfirmModal"/>
         <FormModal 
             :addNote="addNote"    
             :editNote="editNote"
@@ -73,5 +85,9 @@
             :isEditNote="isEditNote"
             :noteEdit="noteEdit"
             :handleNoteEdit="handleNoteEdit"/>
+        <ConfirmationModal 
+            :deleteNote="deleteNote"
+            :showConfirmModal="showConfirmModal" 
+            :handleConfirmModal="handleConfirmModal"/>
     </main>
 </template>

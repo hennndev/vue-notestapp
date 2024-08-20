@@ -2,7 +2,7 @@
 import Note from './Note.vue'
 
     export default {
-        props: ['notes', 'handleShowModalFormNote', 'handleNoteEdit'],
+        props: ['notes', 'handleShowModalFormNote', 'handleNoteEdit', 'handleConfirmModal'],
         components: {
             Note
         }
@@ -32,7 +32,8 @@ import Note from './Note.vue'
                 <Note 
                     :data="note"
                     :handleShowModalFormNote="this.handleShowModalFormNote"
-                    :handleNoteEdit="handleNoteEdit"/>
+                    :handleNoteEdit="handleNoteEdit"
+                    :handleConfirmModal="handleConfirmModal"/>
             </template>
         </section>
     </section>

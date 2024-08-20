@@ -1,7 +1,7 @@
 <script>
     import moment from 'moment'
     export default {
-        props: ['data', 'handleShowModalFormNote', 'handleNoteEdit'],
+        props: ['data', 'handleShowModalFormNote', 'handleNoteEdit', 'handleConfirmModal'],
         methods: {
             handleOpenModalEdit() {
                 this.handleShowModalFormNote(true)
@@ -35,7 +35,9 @@
                     class="group bg-primary rounded-full p-2.5 flex-center cursor-pointer hover:bg-white transition duration-200 ease-in">
                     <i class="pi pi-plus text-sm text-white group-hover:text-primary transition duration-200 ease-in"></i>
                 </div>
-                <div class="group bg-primary rounded-full p-2.5 flex-center cursor-pointer hover:bg-white transition duration-200 ease-in">
+                <div 
+                    @click="this.handleConfirmModal(this.data.id)"
+                    class="group bg-primary rounded-full p-2.5 flex-center cursor-pointer hover:bg-white transition duration-200 ease-in">
                     <i class="pi pi-trash text-sm text-white group-hover:text-primary transition duration-200 ease-in"></i>
                 </div>
                 <div 
