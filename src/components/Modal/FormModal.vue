@@ -11,16 +11,36 @@
                 }
             }
         },
-        props: ['showModalAddNote', 'handleShowModalAddNote', 'addNote'],
+        props: ['addNote', 'editNote', 'showModalFormNote', 'handleShowModalFormNote', 'isEditNote', 'noteEdit', 'handleNoteEdit'],
+        watch: {
+            isEditNote() {
+                if(this.isEditNote) {
+                    this.values = {
+                        title: this.noteEdit.title,
+                        date: moment(new Date(this.noteEdit.date)).format('YYYY-MM-DD'),
+                        background: this.noteEdit.background
+                    }
+                }
+            },
+        },
         methods: {
             handleSubmit() {
-                this.addNote(this.values)
+                if(this.isEditNote) {
+                    this.editNote(this.noteEdit.id, this.values)
+                    this.handleNoteEdit(null, false)
+                } else {
+                    this.addNote(this.values)
+                }
                 this.values = {
                     title: '',
                     date: moment(new Date()).format('YYYY-MM-DD'),
                     background: ''
                 }
-                this.handleShowModalAddNote(false)
+                this.handleShowModalFormNote(false)
+            },
+            handleClose() {
+                this.handleShowModalFormNote(false)
+                this.handleNoteEdit(null, false)
             }
         },
         computed: {
@@ -32,11 +52,11 @@
 </script>
 
 <template>
-    <section v-show="this.showModalAddNote"class="fixed top-0 left-0 right-0 bottom-0 flex-center bg-[rgba(0,0,0,0.4)]">
+    <section v-show="this.showModalFormNote"class="fixed top-0 left-0 right-0 bottom-0 flex-center bg-[rgba(0,0,0,0.4)]">
         <section class="relative w-[600px] min-h-[300px] bg-white rounded-[25px] p-8">
             <section class="mb-5">
-                <i class="pi pi-times absolute top-5 right-5 text-primary cursor-pointer" @click="this.handleShowModalAddNote(false)"></i>
-                <h1 class="text-primary text-3xl font-semibold tracking-tighter">New Note</h1>
+                <i class="pi pi-times absolute top-5 right-5 text-primary cursor-pointer" @click="handleClose"></i>
+                <h1 class="text-primary text-3xl font-semibold tracking-tighter">{{ this.isEditNote ? 'Edit' : 'New' }} Note</h1>
             </section>
 
             

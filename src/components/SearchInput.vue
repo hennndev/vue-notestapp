@@ -21,7 +21,7 @@
 </script>
 
 <template>
-    <section class="flexx w-full border rounded-lg pl-6 pr-2" :class="isFocused ? 'border-2 border-primary' : 'border-gray-300'">
+    <section class="flexx w-full border rounded-xl pl-6 pr-2" :class="isFocused ? 'border-transparent bg-primary' : 'border-gray-200'">
         <i class="pi pi-search text-lg text-gray-400 mr-4"></i>
         <input 
             type="text" 
@@ -29,7 +29,8 @@
             v-model="this.searchTemp"
             @focus="handleFocus"
             @blur="handleBlur"
-            class="flex-1 py-2 text-lg outline-none text-primary mr-4">
+            class="flex-1 py-2 text-lg outline-none text-primary mr-4 bg-transparent"
+            :class="isFocused ? 'text-white' : ''">
         <i v-show="this.searchTemp" class="pi pi-times text-md text-gray-400 mr-4 cursor-pointer" @click="handleClear"></i>
     </section>
 </template>

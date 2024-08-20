@@ -7,8 +7,10 @@
     export default {
         data() {
             return {
-                showModalAddNote: false,
-                notes: []
+                notes: [],
+                noteEdit: null,
+                isEditNote: false,
+                showModalFormNote: false,
             }
         },
         components: {
@@ -31,8 +33,26 @@
                 this.notes.push(newNote)
                 localStorage.setItem('notes', JSON.stringify(this.notes))
             },
-            handleShowModalAddNote(value) {
-                this.showModalAddNote = value
+            editNote(id, note) {
+                const updatedNotes = this.notes.map(n => {
+                    if(n.id === id) {
+                        return {
+                            ...n,
+                            ...note
+                        }
+                    } else {
+                        return n
+                    }
+                })
+                this.notes = updatedNotes
+                localStorage.setItem('notes', JSON.stringify(updatedNotes))
+            },
+            handleShowModalFormNote(value) {
+                this.showModalFormNote = value
+            },
+            handleNoteEdit(data, value) {
+                this.noteEdit = data
+                this.isEditNote = value
             }
         }    
     }
@@ -41,10 +61,17 @@
 <template>
     <main class="container py-4 pb-6">
         <SearchInput/>
-        <Notes :notes="this.notes" :handleShowModalAddNote="handleShowModalAddNote"/>
+        <Notes 
+            :notes="this.notes" 
+            :handleShowModalFormNote="handleShowModalFormNote"
+            :handleNoteEdit="handleNoteEdit"/>
         <FormModal 
-            :showModalAddNote="this.showModalAddNote" 
-            :handleShowModalAddNote="handleShowModalAddNote"
-            :addNote="addNote"/>
+            :addNote="addNote"    
+            :editNote="editNote"
+            :showModalFormNote="this.showModalFormNote" 
+            :handleShowModalFormNote="handleShowModalFormNote"
+            :isEditNote="isEditNote"
+            :noteEdit="noteEdit"
+            :handleNoteEdit="handleNoteEdit"/>
     </main>
 </template>
