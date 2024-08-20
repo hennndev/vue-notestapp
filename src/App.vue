@@ -5,6 +5,7 @@
     import FormModal from './components/Modal/FormModal.vue'
     import NoteDetailModal from './components/Modal/NoteDetailModal.vue'
     import ConfirmationModal from './components/Modal/ConfirmationModal.vue'
+    import Footer from './components/Footer.vue'
 
     export default {
         data() {
@@ -25,6 +26,7 @@
             SearchInput,
             ConfirmationModal,
             NoteDetailModal,
+            Footer
         },
         created() {
             const notes = JSON.parse(localStorage.getItem('notes'))
@@ -89,34 +91,37 @@
 </script>
 
 <template>
-    <main class="container py-4 pb-6">
-        <SearchInput :handleQuery="this.handleQuery"/>
-        <Notes 
-            :notes="this.notes" 
-            :handleShowModalFormNote="handleShowModalFormNote"
-            :handleNoteEdit="handleNoteEdit"
-            :handleConfirmModal="handleConfirmModal"
-            :handleDetailNote="handleDetailNote"/>
-        <FormModal 
-            :addNote="addNote"    
-            :editNote="editNote"
-            :showModalFormNote="this.showModalFormNote" 
-            :handleShowModalFormNote="handleShowModalFormNote"
-            :isEditNote="isEditNote"
-            :noteEdit="noteEdit"
-            :handleNoteEdit="handleNoteEdit"/>
-        <ConfirmationModal 
-            :deleteNote="deleteNote"
-            :showConfirmModal="showConfirmModal" 
-            :handleConfirmModal="handleConfirmModal"/>
-        <NoteDetailModal
-            :showModalDetailNote="this.showModalDetailNote"
-            :noteData="this.noteDetail"
-            :handleDetailNote="handleDetailNote"
-            
-            :handleConfirmModal="handleConfirmModal"
-            
-            :handleShowModalFormNote="handleShowModalFormNote"
-            :handleNoteEdit="handleNoteEdit"/>
+    <main class="min-h-screen flex flex-col">
+        <section class="container flex-1 py-4 pb-6">
+            <SearchInput :handleQuery="this.handleQuery"/>
+            <Notes 
+                :notes="this.notes" 
+                :handleShowModalFormNote="handleShowModalFormNote"
+                :handleNoteEdit="handleNoteEdit"
+                :handleConfirmModal="handleConfirmModal"
+                :handleDetailNote="handleDetailNote"/>
+            <FormModal 
+                :addNote="addNote"    
+                :editNote="editNote"
+                :showModalFormNote="this.showModalFormNote" 
+                :handleShowModalFormNote="handleShowModalFormNote"
+                :isEditNote="isEditNote"
+                :noteEdit="noteEdit"
+                :handleNoteEdit="handleNoteEdit"/>
+            <ConfirmationModal 
+                :deleteNote="deleteNote"
+                :showConfirmModal="showConfirmModal" 
+                :handleConfirmModal="handleConfirmModal"/>
+            <NoteDetailModal
+                :showModalDetailNote="this.showModalDetailNote"
+                :noteData="this.noteDetail"
+                :handleDetailNote="handleDetailNote"
+                
+                :handleConfirmModal="handleConfirmModal"
+                
+                :handleShowModalFormNote="handleShowModalFormNote"
+                :handleNoteEdit="handleNoteEdit"/>
+        </section>
+        <Footer/>
     </main>
 </template>
