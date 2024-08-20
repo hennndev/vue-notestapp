@@ -14,7 +14,7 @@
 </script>
 
 <template>
-    <section v-show="this.showConfirmModal" class="fixed top-0 left-0 right-0 bottom-0 flex-center bg-[rgba(0,0,0,0.4)]">>
+    <section v-show="this.showConfirmModal" class="fixed top-0 left-0 right-0 bottom-0 flex-center bg-[rgba(0,0,0,0.4)]">
         <section class="relative w-[600px] min-h-[200px] bg-white rounded-[25px] p-8">
             <section class="mb-5">
                 <i class="pi pi-times absolute top-5 right-5 text-primary cursor-pointer" @click="handleClose"></i>

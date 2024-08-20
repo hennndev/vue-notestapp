@@ -33,7 +33,7 @@
                 <div 
                     @click="this.handleShowModalFormNote(true)"
                     class="group bg-primary rounded-full p-2.5 flex-center cursor-pointer hover:bg-white transition duration-200 ease-in">
-                    <i class="pi pi-plus text-sm text-white group-hover:text-primary transition duration-200 ease-in"></i>
+                    <i class="pi pi-search-plus text-sm text-white group-hover:text-primary transition duration-200 ease-in"></i>
                 </div>
                 <div 
                     @click="this.handleConfirmModal(this.data.id)"

@@ -27,7 +27,7 @@ import Note from './Note.vue'
             </div>
         </section>
 
-        <section class="mt-10 grid grid-cols-notes gap-x-[20px] gap-y-[40px]">
+        <section v-show="this.notes.length > 0" class="mt-10 grid grid-cols-notes gap-x-[20px] gap-y-[40px]">
             <template v-for="note in this.notes" :key="note.id">
                 <Note 
                     :data="note"
@@ -35,6 +35,9 @@ import Note from './Note.vue'
                     :handleNoteEdit="handleNoteEdit"
                     :handleConfirmModal="handleConfirmModal"/>
             </template>
+        </section>
+        <section v-show="this.notes.length < 1" class="mt-10">
+            <p class="text-primary text-2xl tracking-tight">Currently, you don't have notes yet</p>
         </section>
     </section>
 </template>

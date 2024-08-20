@@ -1,5 +1,6 @@
 <script>
     import { v4 as uuidv4 } from 'uuid'
+    import queryString from 'query-string'
     import Notes from './components/Notes.vue'
     import SearchInput from './components/SearchInput.vue'
     import FormModal from './components/Modal/FormModal.vue'
@@ -12,7 +13,8 @@
                 noteEdit: null,
                 isEditNote: false,
                 showModalFormNote: false,
-                showConfirmModal: null
+                showConfirmModal: null,
+                query: ''
             }
         },
         components: {
@@ -25,6 +27,13 @@
             const notes = JSON.parse(localStorage.getItem('notes'))
             if(notes && notes.length > 0) {
                 this.notes = notes
+            }
+        },
+        watch: {
+            query(newQuery) {
+                const notes = JSON.parse(localStorage.getItem('notes')) || []
+                const updatedNotes = notes.filter(n => n.title.toLowerCase().includes(newQuery.toLowerCase()))
+                this.notes = updatedNotes
             }
         },
         methods: {
@@ -64,6 +73,9 @@
             },
             handleConfirmModal(value) {
                 this.showConfirmModal = value
+            },
+            handleQuery(value) {
+                this.query = value
             }
         }    
     }
@@ -71,7 +83,7 @@
 
 <template>
     <main class="container py-4 pb-6">
-        <SearchInput/>
+        <SearchInput :handleQuery="this.handleQuery"/>
         <Notes 
             :notes="this.notes" 
             :handleShowModalFormNote="handleShowModalFormNote"
