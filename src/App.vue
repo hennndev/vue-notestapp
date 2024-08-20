@@ -1,20 +1,22 @@
 <script>
     import { v4 as uuidv4 } from 'uuid'
-    import queryString from 'query-string'
     import Notes from './components/Notes.vue'
     import SearchInput from './components/SearchInput.vue'
     import FormModal from './components/Modal/FormModal.vue'
+    import NoteDetailModal from './components/Modal/NoteDetailModal.vue'
     import ConfirmationModal from './components/Modal/ConfirmationModal.vue'
 
     export default {
         data() {
             return {
+                query: '',
                 notes: [],
                 noteEdit: null,
+                noteDetail: null,
                 isEditNote: false,
                 showModalFormNote: false,
+                showModalDetailNote: false,
                 showConfirmModal: null,
-                query: ''
             }
         },
         components: {
@@ -22,6 +24,7 @@
             FormModal,
             SearchInput,
             ConfirmationModal,
+            NoteDetailModal,
         },
         created() {
             const notes = JSON.parse(localStorage.getItem('notes'))
@@ -76,6 +79,10 @@
             },
             handleQuery(value) {
                 this.query = value
+            },
+            handleDetailNote(data, value) {
+                this.noteDetail = data
+                this.showModalDetailNote = value
             }
         }    
     }
@@ -88,7 +95,8 @@
             :notes="this.notes" 
             :handleShowModalFormNote="handleShowModalFormNote"
             :handleNoteEdit="handleNoteEdit"
-            :handleConfirmModal="handleConfirmModal"/>
+            :handleConfirmModal="handleConfirmModal"
+            :handleDetailNote="handleDetailNote"/>
         <FormModal 
             :addNote="addNote"    
             :editNote="editNote"
@@ -101,5 +109,14 @@
             :deleteNote="deleteNote"
             :showConfirmModal="showConfirmModal" 
             :handleConfirmModal="handleConfirmModal"/>
+        <NoteDetailModal
+            :showModalDetailNote="this.showModalDetailNote"
+            :noteData="this.noteDetail"
+            :handleDetailNote="handleDetailNote"
+            
+            :handleConfirmModal="handleConfirmModal"
+            
+            :handleShowModalFormNote="handleShowModalFormNote"
+            :handleNoteEdit="handleNoteEdit"/>
     </main>
 </template>
